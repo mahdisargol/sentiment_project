@@ -14,9 +14,4 @@ The project is built using Django, a powerful web framework in Python. It enable
 - Accurate sentiment classification based on trained model
 - Built with Django web framework for scalability and integration capabilities
 
-## Installation
 
-1. Clone the repository:
-
-```bash
-git clone https://github.com/your-username/sentiment_project.git
