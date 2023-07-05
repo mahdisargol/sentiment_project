@@ -1,25 +1,34 @@
 import joblib
 import os
 
-model_filename = os.path.join(os.path.dirname(__file__), 'sentiment_model.joblib')
-model = joblib.load(model_filename)
+# File paths
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, 'sentiment_model.joblib')
+VECTORIZER_PATH = os.path.join(BASE_DIR, 'Vectorizer.joblib')
 
-vectorizer_filename = os.path.join(os.path.dirname(__file__),'Vectorizer.joblib')
-vectorizer = joblib.load(vectorizer_filename)
+# Load model and vectorizer
+model = joblib.load(MODEL_PATH)
+vectorizer = joblib.load(VECTORIZER_PATH)
 
-# Function to predict sentiment
 def predict_sentiment(review):
-    print(review)
+    """
+    Predicts the sentiment (positive or negative) of a given review.
+
+    Args:
+        review (str): The input review.
+
+    Returns:
+        str: The predicted sentiment.
+    """
     processed_review = vectorizer.transform([review])
     prediction = model.predict(processed_review)
     sentiment = 'positive' if prediction[0] == 1 else 'negative'
     return sentiment
 
 
-# Test the model
-review_input = "This movie was great! I really enjoyed it."
-
-
-sentiment = predict_sentiment(review_input)
-print("Review:", review_input)
-print("Sentiment:", sentiment)
+# Example usage
+if __name__ == '__main__':
+    review_input = "This movie was great! I really enjoyed it."
+    sentiment = predict_sentiment(review_input)
+    print("Review:", review_input)
+    print("Sentiment:", sentiment)
